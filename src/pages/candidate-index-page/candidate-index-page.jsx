@@ -2,33 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { PaperStyle, RootStyle } from '../../lib/styles';
+import Candidates from '../../patterns/molecules/candidates';
+import { RootStyle } from '../../lib/styles';
 
-const styles = theme => ({
+const styles = {
   root: RootStyle,
-  paper: PaperStyle(theme),
-});
+  candidatesWrapperStyle: {
+    marginLeft: '1rem',
+    marginRight: '1rem',
+  },
+};
 
 class CandidateIndexPage extends Component {
   render() {
     const { classes, candidates } = this.props;
-    console.log(candidates);
 
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-            {candidates && (
-              candidates.map(candidate => {
-                return (
-                  <div key={candidate.id}>{candidate.id}</div>
-                );
-              }))}
-            </Paper>
+        <div className={classes.candidatesWrapperStyle}>
+          <Grid container spacing={24}>
+            <Candidates type="pending" candidates={candidates.pending} />
+            <Candidates type="considering" candidates={candidates.considering} />
+            <Candidates type="onHold" candidates={candidates.onHold} />
           </Grid>
-        </Grid>
+        </div>
       </div>
     );
   }
@@ -36,7 +33,7 @@ class CandidateIndexPage extends Component {
 
 CandidateIndexPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  candidates: PropTypes.array.isRequired,
+  candidates: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(CandidateIndexPage);

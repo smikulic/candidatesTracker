@@ -1,5 +1,9 @@
 export const initialState = {
-  candidates: [],
+  candidates: {
+    pending: [],
+    considering: [],
+    onHold: [],
+  },
 };
 
 export const candidate = (state = initialState, action) => {
@@ -7,9 +11,11 @@ export const candidate = (state = initialState, action) => {
     case 'candidate/INDEX_LOAD_SUCCESS':
       return {
         ...state,
-        candidates: [
-          ...action.payload,
-        ],
+        candidates: {
+          pending: action.payload[0].data,
+          considering: action.payload[1].data,
+          onHold: action.payload[2].data,
+        },
       };
     default:
       return state;

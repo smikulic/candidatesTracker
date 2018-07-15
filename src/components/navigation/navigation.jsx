@@ -18,6 +18,9 @@ const styles = {
     textDecoration: 'none',
     marginLeft: '1rem',
   },
+  appBarStyle: {
+    background: '#417BB9',
+  },
 };
 
 class Navigation extends Component {
@@ -26,7 +29,7 @@ class Navigation extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBarStyle}>
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
               Checkr

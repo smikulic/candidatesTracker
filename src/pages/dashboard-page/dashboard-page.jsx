@@ -29,7 +29,7 @@ class DashboardPage extends Component {
             <Paper className={classes.paper}>
               Welcome to Candidate Tracker Overview!
               <Link to="/candidates" className={classes.link}>
-                <Button color="inherit">Candidates Overview</Button>
+                <Button color="primary">Candidates Overview</Button>
               </Link>
             </Paper>
           </Grid>

@@ -1,6 +1,7 @@
 import {
-  call,
+  all,
   put,
+  call,
   takeEvery,
 } from 'redux-saga/effects';
 import { request } from '../lib/api';
@@ -12,11 +13,21 @@ import {
 // INDEX
 export function* indexCandidate() {
   try {
-     const response = yield call(request, {
-       url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates',
-       method: 'GET',
-      });
-      yield put(candidateIndexLoadSuccess(response.data));
+    const response = yield all([
+      call(request, {
+        url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=pending',
+        method: 'GET',
+       }),
+       call(request, {
+        url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=consider',
+        method: 'GET',
+       }),
+       call(request, {
+        url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=consider',
+        method: 'GET',
+       })
+    ]);
+      yield put(candidateIndexLoadSuccess(response));
   } catch (e) {
     yield put(candidateIndexLoadFail(e.message));
   }
