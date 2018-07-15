@@ -2,36 +2,24 @@ export const ACTION_UNKNOWN = {
   type: 'UNKNOWN',
 };
 
+export const candidateMock = {
+  id: '1',
+  name: 'Bob Smith',
+};
+export const candidateMock2 = {
+  id: '2',
+  name: 'Jane Doe',
+};
+
 export const pendingCandidatesMock = [{
   data: [
-    {
-      id: '1',
-      name: 'Bob Smith',
-    },
-    {
-      id: '2',
-      name: 'Bobby Smithy',
-    },
-    {
-      id: '3',
-      name: 'Smith Bobby',
-    },
+    candidateMock,
   ],
 }];
 
 export const consideringCandidatesMock = [
-  {
-    id: '4',
-    name: 'Jane Doe',
-  },
-  {
-    id: '5',
-    name: 'Joe Doe',
-  },
-  {
-    id: '6',
-    name: 'Joey Doey',
-  },
+  candidateMock,
+  candidateMock2,
 ];
 
 export const candidatesMock = {
@@ -51,6 +39,9 @@ export const responseCandidatesMock = [
     data: consideringCandidatesMock,
   },
 ];
+export const responseCandidateMock = [{
+  data: candidateMock,
+}];
 
 export const getPendingCandidatesMock = {
   url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=pending',
@@ -62,5 +53,10 @@ export const getConsideringCandidatesMock = {
 }
 export const getOnHoldCandidatesMock = {
   url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=suspended',
+  method: 'GET',
+}
+
+export const getCandidateMock = {
+  url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates/1',
   method: 'GET',
 }

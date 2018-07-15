@@ -15,15 +15,15 @@ const styles = {
 
 class CandidateIndexPage extends Component {
   render() {
-    const { classes, candidates } = this.props;
+    const { classes, candidates, candidateShowEnter } = this.props;
 
     return (
       <div className={classes.root}>
         <div className={classes.candidatesWrapperStyle}>
           <Grid container spacing={24}>
-            <Candidates type="pending" candidates={candidates.pending} />
-            <Candidates type="considering" candidates={candidates.considering} />
-            <Candidates type="onHold" candidates={candidates.onHold} />
+            <Candidates type="pending" candidates={candidates.pending} show={candidateShowEnter} />
+            <Candidates type="considering" candidates={candidates.considering} show={candidateShowEnter} />
+            <Candidates type="onHold" candidates={candidates.onHold} show={candidateShowEnter} />
           </Grid>
         </div>
       </div>
@@ -34,6 +34,7 @@ class CandidateIndexPage extends Component {
 CandidateIndexPage.propTypes = {
   classes: PropTypes.object.isRequired,
   candidates: PropTypes.object.isRequired,
+  candidateShowEnter: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(CandidateIndexPage);

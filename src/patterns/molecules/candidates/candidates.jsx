@@ -28,6 +28,8 @@ const styles = theme => ({
   },
   candidateNameStyle: {
     fontWeight: 600,
+    paddingRight: 0,
+    cursor: 'pointer',
   },
   reportRowStyle: {
     fontWeight: 600,
@@ -63,6 +65,10 @@ class Candidates extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  };
+  
+  handleOnCandidateClick = (candidateId) => {
+    this.props.show(candidateId);
   };
 
   render() {
@@ -101,7 +107,12 @@ class Candidates extends Component {
                 candidates.map(candidate => {
                   return (
                     <TableRow key={candidate.id}>
-                      <TableCell component="th" scope="row" className={classes.candidateNameStyle}>
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        className={classes.candidateNameStyle}
+                        onClick={this.handleOnCandidateClick.bind(this, candidate.id)}
+                      >
                         {candidate.name}
                       </TableCell>
                       <TableCell>
@@ -113,10 +124,7 @@ class Candidates extends Component {
               )}
             </TableBody>
           </Table>
-          <div
-            className={classes.showReportsButtonStyle}
-            onClick={this.handleClickOpen('paper')}
-          >
+          <div className={classes.showReportsButtonStyle} onClick={this.handleClickOpen('paper')}>
             {typeMessageNode}
           </div>
         </Paper>
@@ -125,7 +133,6 @@ class Candidates extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           scroll="paper"
-          aria-labelledby="scroll-dialog-title"
         >
           <DialogTitle id="scroll-dialog-title">{reportsHeadingNode}</DialogTitle>
           <DialogContent>
@@ -145,7 +152,7 @@ class Candidates extends Component {
                           {key}
                         </TableCell>
                         <TableCell>
-                          {formattedCandidateData[key]}
+                          {formattedCandidateData[key] || 'N/A'}
                         </TableCell>
                       </TableRow>
                     );
@@ -162,6 +169,7 @@ class Candidates extends Component {
 }
 
 Candidates.propTypes = {
+  show: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   candidates: PropTypes.array.isRequired,

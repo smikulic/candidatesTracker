@@ -8,6 +8,7 @@ import root from './sagas/index';
 import rootReducer from './redux/reducers';
 import registerServiceWorker from './registerServiceWorker';
 import { candidateIndexEnter } from './redux/actions/candidate-actions';
+import CandidateShowPageContainer from './redux/containers/candidate-show-page-container';
 import CandidateIndexPageContainer from './redux/containers/candidate-index-page-container';
 import DashboardPage from './pages/dashboard-page';
 import App from './App';
@@ -29,6 +30,7 @@ render(
         <Switch>
           <Route exact path='/' component={DashboardPage} />
           <Route path='/candidates' component={CandidateIndexPageContainer} onEnter={store.dispatch(candidateIndexEnter())} />
+          <Route path='/candidate/:id' component={CandidateShowPageContainer} />
         </Switch>
       </App>
     </Router>

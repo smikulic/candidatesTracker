@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { candidateShowEnter } from '../actions/candidate-actions';
 import CandidateIndexPage from '../../pages/candidate-index-page';
 
 const mapStateToProps = state => ({
@@ -6,6 +7,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  candidateShowEnter: id => dispatch(candidateShowEnter(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CandidateIndexPage);

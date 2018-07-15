@@ -1,6 +1,14 @@
-import { ACTION_UNKNOWN, candidatesMock, responseCandidatesMock } from '../../redux-test-helper';
+import {
+  ACTION_UNKNOWN,
+  candidateMock,
+  candidatesMock,
+  responseCandidatesMock,
+} from '../../redux-test-helper';
 import { candidate as reducer, initialState } from './candidate-reducer';
-import { candidateIndexLoadSuccess } from '../actions/candidate-actions';
+import {
+  candidateShowLoadSuccess,
+  candidateIndexLoadSuccess,
+} from '../actions/candidate-actions';
 
 const stateMock = {
   appState: {
@@ -27,6 +35,17 @@ describe('candidate reducer', () => {
       const expectedState = {
         ...initialState,
         candidates: candidatesMock,
+      };
+      const currentState = initialState;
+      expect(reducer(currentState, action)).toEqual(expectedState);
+    });
+  });
+  describe('with no given state and a candidateShowLoadSuccess action', () => {
+    it('returns the state with loaded candidate entity', () => {
+      const action = candidateShowLoadSuccess(candidateMock);
+      const expectedState = {
+        ...initialState,
+        candidate: candidateMock,
       };
       const currentState = initialState;
       expect(reducer(currentState, action)).toEqual(expectedState);
