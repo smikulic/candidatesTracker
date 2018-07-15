@@ -18,16 +18,20 @@ export function* indexCandidate() {
         url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=pending',
         method: 'GET',
        }),
-       call(request, {
+      call(request, {
         url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=consider',
         method: 'GET',
-       }),
-       call(request, {
-        url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=consider',
+      }),
+      call(request, {
+        url: 'https://8z74to6yra.execute-api.us-east-1.amazonaws.com/production/candidates?status=suspended',
         method: 'GET',
-       })
+      })
     ]);
+    if (response) {
       yield put(candidateIndexLoadSuccess(response));
+    } else {
+      yield put(candidateIndexLoadFail('No response for all requests'));
+    }
   } catch (e) {
     yield put(candidateIndexLoadFail(e.message));
   }

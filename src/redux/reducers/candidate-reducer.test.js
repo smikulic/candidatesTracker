@@ -1,4 +1,4 @@
-import { ACTION_UNKNOWN, candidatesMock } from '../../redux-test-helper';
+import { ACTION_UNKNOWN, candidatesMock, responseCandidatesMock } from '../../redux-test-helper';
 import { candidate as reducer, initialState } from './candidate-reducer';
 import { candidateIndexLoadSuccess } from '../actions/candidate-actions';
 
@@ -23,7 +23,7 @@ describe('candidate reducer', () => {
   });
   describe('with no given state and a candidateIndexLoadSuccess action', () => {
     it('returns the state with loaded candidates list', () => {
-      const action = candidateIndexLoadSuccess(candidatesMock);
+      const action = candidateIndexLoadSuccess(responseCandidatesMock);
       const expectedState = {
         ...initialState,
         candidates: candidatesMock,
